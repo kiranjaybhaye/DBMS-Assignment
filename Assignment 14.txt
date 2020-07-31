@@ -1,0 +1,25 @@
+﻿Anuja Shirsath
+200240320021
+
+Assignment 14:-
+1) Write a command that puts the following values, in their given order, into the salespeople table: city – San Jose, name – Blanco, comm – NULL, cnum – 1100.
+
+Ans:create table salespeople1 as select city,sname,comm,snum from salepeople;
+       drop table salespeople;
+       rename table salespeople1 to salepeople;
+       insert into salespeople(city,sname,comm,cnum) values('san jose','blanco',NULL,1100);
+
+2) Write a command that removes all orders from customer Clemens from the Orders table.
+
+Ans: delete from orders where cnum in(select cnum from customers where cname='Clemens');
+
+3) Write a command that increases the rating of all customers in Rome by 100.
+
+Ans: update customer set rating=rating + 100 where city='Rome';
+
+
+4) Salesperson Serres has left the company. Assign her customers to Motika.
+
+Ans: update customers,orders
+       set customers.snum=(select snum from salespeople where sname='Motika'),
+       orders.snum=(select snum from salespeople where sname='Motike') where(customers.snum=(select snum from        salespeople where sname='Serres')) and (orders.snum=(select snum from salespeople where sname='Serres'));
